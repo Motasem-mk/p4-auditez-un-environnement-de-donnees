@@ -6,7 +6,7 @@ Ce projet a été réalisé dans le cadre du parcours **Data Engineer** d’Open
 
 L’objectif est d’auditer un environnement de données analytique afin d’identifier des incohérences entre les données de vente, les logs de base de données, les tables métier et les résultats affichés dans un environnement OLAP.
 
-Le projet se place dans le contexte de **SuperSmartMarket**, une chaîne de supermarchés française utilisant une architecture décisionnelle basée sur une base de données opérationnelle, un cube OLAP, Azure Analysis Services et Power BI.
+Le projet se place dans le contexte de **SuperSmartMarket**, une chaîne de supermarchés française utilisant une architecture décisionnelle basée sur une base de données opérationnelle, un cube OLAP, Microsoft Azure Analysis Services et Power BI.
 
 La mission consiste à comprendre l’architecture existante, créer un dictionnaire des données, concevoir un schéma relationnel, construire un prototype local de base de données, vérifier les chiffres d’affaires avec des requêtes SQL, analyser les logs, identifier les causes des incohérences et proposer des mesures correctives pour améliorer la résilience du système de données.
 
@@ -170,15 +170,19 @@ Les requêtes SQL ont permis de répondre aux besoins métier suivants :
 1. confirmer le chiffre d’affaires total du 14 août ;
 2. calculer le chiffre d’affaires par client pour le top 10 des clients ;
 3. calculer la part de chiffre d’affaires encaissée par employé ;
-4. analyser les logs d’insertion, de mise à jour et de suppression ;
-5. vérifier la cohérence entre les logs et les tables de dimensions ;
-6. identifier les enregistrements manquants ;
-7. identifier les valeurs incorrectes dans les logs ;
-8. proposer des views de monitoring pour suivre les anomalies ;
-9. proposer des corrections contrôlées pour certains écarts ;
-10. proposer des mesures de résilience comme des contraintes, triggers et contrôles SQL.
+4. analyser le nombre total de logs ;
+5. analyser la répartition des logs par action ;
+6. analyser les actions `INSERT` sur les ventes ;
+7. vérifier si les ventes présentes dans les logs sont bien représentées dans la table de faits ;
+8. identifier les clients présents dans les logs mais absents de la table `clients` ;
+9. analyser les actions `UPDATE` sur les produits ;
+10. identifier les valeurs de prix invalides dans les logs produits ;
+11. analyser les incohérences `hash_mdp` entre les logs et la table `employee` ;
+12. analyser les actions `DELETE` sur la table `employee` ;
+13. proposer des views de monitoring pour suivre les anomalies ;
+14. proposer des corrections contrôlées pour certains écarts identifiés.
 
-Les requêtes SQL nettoyées sont disponibles dans le dossier :
+Les requêtes SQL nettoyées à partir de la présentation sont disponibles dans le dossier :
 
 ```text
 sql/
@@ -277,7 +281,7 @@ Les livrables principaux du projet sont :
 | Support de présentation  | Présentation PPT contenant l’architecture, le dictionnaire des données, le schéma relationnel, les résultats SQL, l’analyse des logs, les mesures correctives et le prototype |
 | Dictionnaire des données | Fichier documentant les tables et colonnes principales                                                                                                                        |
 | Schémas                  | Architecture de l’entreprise et schéma relationnel du prototype                                                                                                               |
-| Requêtes SQL             | Requêtes SQL nettoyées pour la validation du chiffre d’affaires, l’analyse des logs, les views de monitoring et les mesures correctives proposées                             |
+| Requêtes SQL             | Requêtes SQL nettoyées à partir de la présentation pour la validation du chiffre d’affaires, l’analyse des logs, les views de monitoring et les corrections contrôlées        |
 
 ---
 
