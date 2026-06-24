@@ -20,7 +20,6 @@ JOIN
 WHERE
     s.Date_achat = '2024-08-14';
 
--- Presentation result:
 -- total_revenue = 284243.8790573478
 
 
@@ -65,7 +64,6 @@ SELECT
 FROM
     logs;
 
--- Presentation result:
 -- 207,489 logs total
 
 
@@ -78,7 +76,6 @@ FROM
 GROUP BY
     action;
 
--- Presentation results:
 -- INSERT = 206905
 -- DELETE = 2
 -- UPDATE = 582
@@ -92,7 +89,6 @@ FROM logs
 WHERE action = 'INSERT'
 GROUP BY table_insert;
 
--- Presentation results:
 -- Client = 20
 -- Ventes = 206885
 
@@ -105,7 +101,6 @@ FROM logs
 WHERE action = 'UPDATE'
 GROUP BY table_insert;
 
--- Presentation results:
 -- Employé = 7
 -- Produits = 575
 
@@ -118,7 +113,6 @@ FROM logs
 WHERE action = 'DELETE'
 GROUP BY table_insert;
 
--- Presentation result:
 -- Employé = 2
 
 
@@ -134,7 +128,6 @@ FROM logs l
 WHERE l.table_insert = 'Ventes'
   AND l.action = 'INSERT';
 
--- Presentation result:
 -- logs has 206885 rows for INSERT and Ventes
 
 
@@ -145,7 +138,6 @@ FROM logs l
 WHERE l.table_insert = 'Ventes'
   AND l.action = 'INSERT';
 
--- Presentation result:
 -- 41377 unique records
 
 
@@ -154,7 +146,6 @@ SELECT *,
        ROW_NUMBER() OVER (ORDER BY ID_BDD) AS n
 FROM sales_details;
 
--- Presentation result:
 -- 41377 rows
 
 
@@ -169,7 +160,6 @@ WHERE l.table_insert = 'Ventes'
       WHERE sd.ID_BDD = l.id_ligne
   );
 
--- Presentation result:
 -- No missing records
 
 
@@ -184,7 +174,6 @@ WHERE NOT EXISTS (
       AND sd.ID_BDD = l.id_ligne
 );
 
--- Presentation result:
 -- No redundant records
 
 
@@ -205,7 +194,6 @@ WHERE l.action = 'INSERT'
       WHERE c.CUSTOMER_ID = l.detail
   );
 
--- Presentation result:
 -- 20 client records in logs do not exist in the clients table
 
 
@@ -226,8 +214,6 @@ WHERE l.action = 'UPDATE'
   AND table_insert = 'Produits'
   AND l.champs = 'prix';
 
--- Presentation result:
--- 575 product UPDATE logs are referenced in the products table
 
 
 /* 5.2 Count invalid product price updates in logs */
@@ -239,7 +225,6 @@ WHERE l.action = 'UPDATE'
   AND l.champs = 'prix'
   AND NOT l.detail REGEXP '^[0-9]+(\\.[0-9]+)?$';
 
--- Presentation result:
 -- 136 records have date values instead of price values
 
 
@@ -253,7 +238,6 @@ WHERE table_insert = 'Produits'
       WHERE p.EAN = l.id_ligne
   );
 
--- Presentation result:
 -- No missing records
 
 
@@ -275,7 +259,6 @@ WHERE l.action = 'UPDATE'
 GROUP BY e.id_employe
 HAVING db_hash_mdp <> log_hash_mdp;
 
--- Presentation result:
 -- 7 employee hash_mdp mismatches
 
 
@@ -295,7 +278,6 @@ WHERE l.table_insert = 'Employé'
       WHERE e.id_employe = l.id_ligne
   );
 
--- Presentation result:
 -- 2 records returned, confirming that corresponding employees were deleted
 
 
